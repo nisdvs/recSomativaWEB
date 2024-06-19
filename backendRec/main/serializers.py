@@ -11,7 +11,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('id', 'email', 'groups', 'name', )
+        fields = ('id', 'email', 'groups', 'name', 'registrationNumber' )
         many = True
 
 

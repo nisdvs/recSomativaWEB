@@ -3,6 +3,20 @@
     const cart = Carrinho(); 
     const { addCarrinho } = cart;
     
+    import { Usuario } from '@/stores/cart';
+    const nomeUsuario = ref("-")
+    
+    try {
+      const novoUser = Usuario()
+      const { verUser } = novoUser;
+      nomeUsuario.value = verUser
+
+      const { data } = await useFetch('http://localhost:8000/api/auth/custom-users')
+      const pesquisa = data.value.results.filter(item => item.email == nomeUsuario.value) 
+      cnpjUsuario.value = pesquisa[0].registrationNumber 
+    } catch (error) {
+      navigateTo('/login');
+    }
 
 
     definePageMeta({
@@ -23,21 +37,21 @@
 
     const apresentarDados = ref()
     const procurarNotas = async () =>{
-      if(!idNota.value || !CustomCNPJ.value){
+      if(!idNota.value){
         alert('Preencha todos os campos!')
       } 
 
       // DATA INICIO
       if(dtSelecionada.value == '1'){
         let dataFormatada = formatDate(dtInicio.value) 
-        const { data: dadosNotas } = await useFetch(`http://localhost:8000/api/auth/invoice?code=${idNota.value}&customCNPJ=${CustomCNPJ.value}&emissionDate_after=${dataFormatada}`);
+        const { data: dadosNotas } = await useFetch(`http://localhost:8000/api/auth/invoice?code=${idNota.value}&customCNPJ=${cnpjUsuario.value}&emissionDate_after=${dataFormatada}`);
         apresentarDados.value = dadosNotas.value.results 
       }
       
       // DATA FINAL
       else{
         let dataFormatada = formatDate(dtFinal.value) 
-        const { data: dadosNotas } = await useFetch(`http://localhost:8000/api/auth/invoice?code=${idNota.value}&customCNPJ=${CustomCNPJ.value}&emissionDate_before=${dataFormatada}`);
+        const { data: dadosNotas } = await useFetch(`http://localhost:8000/api/auth/invoice?code=${idNota.value}&customCNPJ=${cnpjUsuario.value}&emissionDate_before=${dataFormatada}`);
         apresentarDados.value = dadosNotas.value.results 
       }
     }
@@ -69,7 +83,7 @@
         <br>
         <div class="form-group"> 
             <InputText v-model="idNota" placeholder="Digite o id da Nota" style="margin-right: 20px;"/>
-            <InputText v-model="CustomCNPJ" placeholder="Digite seu CNPJ" style="margin-right: 20px;"/>
+            <!-- <InputText v-model="CustomCNPJ" placeholder="Digite seu CNPJ" style="margin-right: 20px;"/> -->
             <div class="flex flex-wrap gap-4">
                 <div class="flex items-center" style="margin-bottom: 10px; margin-top: 10px;">
                     <RadioButton v-model="dtSelecionada" value="1" style="margin-right: 10px;"/>
