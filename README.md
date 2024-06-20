@@ -1,2 +1,2 @@
 VERSEL: https://recsomativa.vercel.app/
-RAILWAY: -
+RAILWAY: https://recsomativaweb-production.up.railway.app/
