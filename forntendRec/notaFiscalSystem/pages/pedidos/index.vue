@@ -9,7 +9,7 @@
     const { verUser } = novoUser;
     nomeUsuario.value = verUser
 
-    const { data } = await useFetch('http://localhost:8000/api/auth/custom-users')
+    const { data } = await useFetch('https://recsomativaweb-production.up.railway.app/api/auth/custom-users')
     const pesquisa = data.value.results.filter(item => item.email == nomeUsuario.value) 
     nomeUsuario.value = pesquisa[0].id 
   } catch (error) {
@@ -20,7 +20,7 @@
 
   const warranties = ref([])
   
-    const { data } = await useFetch('http://localhost:8000/api/auth/warranty')
+    const { data } = await useFetch('https://recsomativaweb-production.up.railway.app/api/auth/warranty')
     warranties.value = data.value.results || [] 
   
     const statusText = (status) => {
@@ -44,7 +44,7 @@
   
   const approveWarranty = async (id, idAutor, produtos) => {
     try {
-        await useFetch(`http://localhost:8000/api/auth/warranty/${id}/`, {
+        await useFetch(`https://recsomativaweb-production.up.railway.app/api/auth/warranty/${id}/`, {
         method: 'PUT',
         body: {
                     status: "A",
@@ -56,7 +56,7 @@
         })    
 
         alert("Aprovado com sucesso")
-        const { data } = await useFetch('http://localhost:8000/api/auth/warranty')
+        const { data } = await useFetch('https://recsomativaweb-production.up.railway.app/api/auth/warranty')
         warranties.value = data.value.results || [] 
     } catch (error) {
         alert("Erro ao reprovar")
@@ -67,7 +67,7 @@
     console.log("AUTOR", idAutor)
     console.log("PRODUTOS", produtos)
     try {
-        await useFetch(`http://localhost:8000/api/auth/warranty/${id}/`, {
+        await useFetch(`https://recsomativaweb-production.up.railway.app/api/auth/warranty/${id}/`, {
         method: 'PUT',
         body: {
                     status: "R",
@@ -79,7 +79,7 @@
         })    
 
         alert("Reprovado com sucesso")
-        const { data } = await useFetch('http://localhost:8000/api/auth/warranty')
+        const { data } = await useFetch('https://recsomativaweb-production.up.railway.app/api/auth/warranty')
         warranties.value = data.value.results || [] 
     } catch (error) {
         alert("Erro ao reprovar")

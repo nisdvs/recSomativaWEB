@@ -36,7 +36,7 @@
     nomeUsuario.value = verUser
     emailUsuario.value = verUser
 
-    const { data } = await useFetch('http://localhost:8000/api/auth/custom-users')
+    const { data } = await useFetch('https://recsomativaweb-production.up.railway.app/api/auth/custom-users')
     const pesquisa = data.value.results.filter(item => item.email == nomeUsuario.value) 
     nomeUsuario.value = pesquisa[0].name
   } catch (error) {

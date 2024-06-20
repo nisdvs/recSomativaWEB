@@ -11,7 +11,7 @@
       const { verUser } = novoUser;
       nomeUsuario.value = verUser
 
-      const { data } = await useFetch('http://localhost:8000/api/auth/custom-users')
+      const { data } = await useFetch('https://recsomativaweb-production.up.railway.app/api/auth/custom-users')
       const pesquisa = data.value.results.filter(item => item.email == nomeUsuario.value) 
       cnpjUsuario.value = pesquisa[0].registrationNumber 
     } catch (error) {
@@ -44,14 +44,14 @@
       // DATA INICIO
       if(dtSelecionada.value == '1'){
         let dataFormatada = formatDate(dtInicio.value) 
-        const { data: dadosNotas } = await useFetch(`http://localhost:8000/api/auth/invoice?code=${idNota.value}&customCNPJ=${cnpjUsuario.value}&emissionDate_after=${dataFormatada}`);
+        const { data: dadosNotas } = await useFetch(`https://recsomativaweb-production.up.railway.app/api/auth/invoice?code=${idNota.value}&customCNPJ=${cnpjUsuario.value}&emissionDate_after=${dataFormatada}`);
         apresentarDados.value = dadosNotas.value.results 
       }
       
       // DATA FINAL
       else{
         let dataFormatada = formatDate(dtFinal.value) 
-        const { data: dadosNotas } = await useFetch(`http://localhost:8000/api/auth/invoice?code=${idNota.value}&customCNPJ=${cnpjUsuario.value}&emissionDate_before=${dataFormatada}`);
+        const { data: dadosNotas } = await useFetch(`https://recsomativaweb-production.up.railway.app/api/auth/invoice?code=${idNota.value}&customCNPJ=${cnpjUsuario.value}&emissionDate_before=${dataFormatada}`);
         apresentarDados.value = dadosNotas.value.results 
       }
     }
@@ -63,7 +63,7 @@
     const openDialogProdutos = async (idNota) =>{
       if(dialogProdutos.value == false){
         dialogProdutos.value = true
-        const { data: dadosNotaProdutos } = await useFetch(`http://localhost:8000/api/auth/invoice-item?invoiceFK=${idNota}`);
+        const { data: dadosNotaProdutos } = await useFetch(`https://recsomativaweb-production.up.railway.app/api/auth/invoice-item?invoiceFK=${idNota}`);
         apresentarProdutos.value = dadosNotaProdutos.value.results 
       }else{
         dialogProdutos.value = false 
