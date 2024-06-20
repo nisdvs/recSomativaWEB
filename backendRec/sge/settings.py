@@ -29,15 +29,16 @@ SECRET_KEY = 'django-insecure-rgi9-e-+s0$%iw37a4_nn75@(dqhkf096a(x_u!m*6+d@5c_l=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-production_server = 'sge-senai-mange.up.railway.app'
+production_server = 'recsomativaweb-production.up.railway.app'
 
 ALLOWED_HOSTS = ['*']
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://localhost',
-#     '127.0.0.1',
-#     'https://' + production_server
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost',
+    '127.0.0.1',
+    'https://recsomativa.vercel.app/',
+    'https://' + production_server
+]
 
 
 # Application definition
