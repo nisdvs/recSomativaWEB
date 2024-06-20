@@ -15,7 +15,8 @@
       const pesquisa = data.value.results.filter(item => item.email == nomeUsuario.value) 
       cnpjUsuario.value = pesquisa[0].registrationNumber 
     } catch (error) {
-      navigateTo('/login');
+      alert(error)
+      // navigateTo('/login');
     }
 
 
