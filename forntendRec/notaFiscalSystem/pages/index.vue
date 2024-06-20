@@ -5,7 +5,7 @@
     
     import { Usuario } from '@/stores/cart';
     const nomeUsuario = ref("-")
-    
+    const cnpjUsuario = ref(0)
     try {
       const novoUser = Usuario()
       const { verUser } = novoUser;
